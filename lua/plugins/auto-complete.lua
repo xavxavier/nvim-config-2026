@@ -25,7 +25,37 @@ return {
 		-- C-k: Toggle signature help (if signature.enabled = true)
 		--
 		-- See :h blink-cmp-config-keymap for defining your own keymap
-		keymap = { preset = "default" },
+		keymap = {
+			preset = "enter",
+			["<Up>"] = { "select_prev", "fallback" },
+			["<Down>"] = { "select_next", "fallback" },
+
+			-- Control+j and Control+k to go up/down in the menu
+			["<C-j>"] = { "select_next", "fallback" },
+			["<C-k>"] = { "select_prev", "fallback" },
+
+			-- Disable C-e from the preset
+			["<C-e>"] = false,
+
+			-- Show with a list of providers
+			["<C-space>"] = {
+				function(cmp)
+					cmp.show({ providers = { "snippets" } })
+				end,
+			},
+
+			-- Press Enter to select and accept
+			["<Return>"] = {
+				function(cmp)
+					cmp.select_and_accept()
+				end,
+			},
+			["<C-Return>"] = {
+				function(cmp)
+					cmp.select_and_accept()
+				end,
+			},
+		},
 
 		appearance = {
 			-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
@@ -34,7 +64,7 @@ return {
 		},
 
 		-- (Default) Only show the documentation popup when manually triggered
-		completion = { documentation = { auto_show = false } },
+		completion = { documentation = { auto_show = true } },
 
 		-- Default list of enabled providers defined so that you can extend it
 		-- elsewhere in your config, without redefining it, due to `opts_extend`
