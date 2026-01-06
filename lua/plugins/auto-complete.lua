@@ -45,11 +45,6 @@ return {
 			},
 
 			-- Press Enter to select and accept
-			["<Return>"] = {
-				function(cmp)
-					cmp.select_and_accept()
-				end,
-			},
 			["<C-Return>"] = {
 				function(cmp)
 					cmp.select_and_accept()
